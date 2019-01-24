@@ -72,7 +72,7 @@ public class LoginActivity extends MVPBaseActivity<LoginContract.View, LoginPres
         switch (view.getId()) {
             case R.id.btn_login:
                 if (isLogin()) {
-                    mPresenter.login(strPhone, strShop, MD5.strToMd5Low32(MD5.strToMd5Low32(strPwd) + "bby"));
+                    mPresenter.login(strPhone, strShop, strPwd);
                 }
                 break;
         }
