@@ -13,7 +13,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.KeyEvent;
@@ -55,7 +54,7 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
     View lineLishi;
     LinearLayout lishiOrderTitle;
     LinearLayout noOrderLayout;
-    NestedScrollView scrollView;
+//    NestedScrollView scrollView;
 
     private HistoryOrderBo historyOrderBo;
 
@@ -122,7 +121,7 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
         lishiOrderTitle = (LinearLayout) findViewById(R.id.lishi_order_title);
         lineLishi = findViewById(R.id.line_lishi);
         noOrderLayout = (LinearLayout) findViewById(R.id.no_order_layout);
-        scrollView = (NestedScrollView) findViewById(R.id.scrollView);
+//        scrollView = (NestedScrollView) findViewById(R.id.scrollView);
         LinearLayoutManager manager = new LinearLayoutManager(this);
         manager.setOrientation(LinearLayoutManager.VERTICAL);
         orderList.setLayoutManager(manager);
