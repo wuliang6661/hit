@@ -144,6 +144,7 @@
     <orderEntry type="library" name="Gradle: com.android.support:appcompat-v7-25.3.1" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:support-fragment-25.3.1" level="project" />
     <orderEntry type="library" name="Gradle: com.trello:rxlifecycle:0.8.0@jar" level="project" />
+    <orderEntry type="library" name="Gradle: com.makeramen:roundedimageview-2.3.0" level="project" />
     <orderEntry type="library" name="Gradle: com.jakewharton:butterknife-annotations:8.5.1@jar" level="project" />
     <orderEntry type="library" name="Gradle: io.netty:netty-handler:4.1.0.Beta7@jar" level="project" />
     <orderEntry type="library" name="Gradle: io.netty:netty-codec-http:4.1.0.Beta7@jar" level="project" />

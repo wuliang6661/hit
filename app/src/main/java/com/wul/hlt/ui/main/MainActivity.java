@@ -1,15 +1,18 @@
 package com.wul.hlt.ui.main;
 
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -79,6 +82,14 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
 
         mPresenter.getUnOrderList();
         handler.sendEmptyMessageDelayed(0, updateTime);
+
+        if (ActivityCompat.checkSelfPermission(AppManager.getAppManager().curremtActivity(), Manifest.permission.CALL_PHONE) !=
+                PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(AppManager.getAppManager().curremtActivity(),
+                    new String[]{
+                            Manifest.permission.CALL_PHONE
+                    }, 1);
+        }
     }
 
     @Override
@@ -151,6 +162,7 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
 
     @Override
     public void getUnOrderList(final UnOrderBo unOrderBo) {
+        mPresenter.getHistoryOrderList();
         if (unOrderBo.getGreengrocerUnOrderList() == null || unOrderBo.getGreengrocerUnOrderList().size() == 0) {
             if (!unOrderBoIsNull) {      //如果上次列表不为空
                 noOrderLayout.setVisibility(View.VISIBLE);

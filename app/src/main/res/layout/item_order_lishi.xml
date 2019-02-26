@@ -98,6 +98,6 @@
         android:layout_width="match_parent"
         android:layout_height="1px"
         android:layout_alignParentBottom="true"
-        android:background="#61c95f" />
+        android:background="@color/zhu_color" />
 
 </RelativeLayout>

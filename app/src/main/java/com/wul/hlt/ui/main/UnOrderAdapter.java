@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.dinuscxj.progressbar.CircleProgressBar;
@@ -51,8 +52,8 @@ public class UnOrderAdapter extends RecyclerView.Adapter<UnOrderAdapter.ViewHold
         holder.shopName.setText(datas.get(position).getDeliverRestName());
         holder.shopAddress.setText(datas.get(position).getDeliverAddress());
         holder.orderPrice.setText("¥ " + datas.get(position).getAmount());
-        holder.orderMore.setTag(datas.get(position));
-        holder.orderMore.setOnClickListener(new View.OnClickListener() {
+        holder.itemLayout.setTag(datas.get(position));
+        holder.itemLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 UnOrderBo.GreengrocerUnOrderListBean data = (UnOrderBo.GreengrocerUnOrderListBean) v.getTag();
@@ -113,6 +114,7 @@ public class UnOrderAdapter extends RecyclerView.Adapter<UnOrderAdapter.ViewHold
         private TextView orderMore;
         private CircleProgressBar circleProgressBar;
         private TextView timeText;
+        private RelativeLayout itemLayout;
 
 
         ViewHolder(View itemView) {
@@ -123,6 +125,7 @@ public class UnOrderAdapter extends RecyclerView.Adapter<UnOrderAdapter.ViewHold
             orderMore = (TextView) itemView.findViewById(R.id.order_more);
             circleProgressBar = (CircleProgressBar) itemView.findViewById(R.id.order_progress);
             timeText = (TextView) itemView.findViewById(R.id.time_text);
+            itemLayout = (RelativeLayout) itemView.findViewById(R.id.item_layout);
             circleProgressBar.setProgressFormatter(null);
             circleProgressBar.setMax(100);
         }

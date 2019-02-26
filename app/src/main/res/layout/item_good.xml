@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="66dp"
+    android:layout_height="80dp"
     android:background="@color/white"
     android:gravity="center_vertical"
     android:orientation="horizontal">
@@ -9,8 +9,8 @@
 
     <ImageView
         android:id="@+id/good_img"
-        android:layout_width="38dp"
-        android:layout_height="38dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_marginLeft="12dp" />
 
 
@@ -28,7 +28,8 @@
             android:layout_height="wrap_content"
             android:text="卷心菜"
             android:textColor="#333333"
-            android:textSize="13dp" />
+            android:textSize="13dp"
+            android:textStyle="bold" />
 
 
         <TextView
@@ -38,7 +39,8 @@
             android:layout_marginTop="5dp"
             android:text="¥ 12.00元/斤"
             android:textColor="#ff722b"
-            android:textSize="13sp" />
+            android:textSize="15sp"
+            android:textStyle="bold" />
 
 
     </LinearLayout>
@@ -56,7 +58,7 @@
             android:layout_height="wrap_content"
             android:text="数量：5斤"
             android:textColor="#666666"
-            android:textSize="13dp" />
+            android:textSize="15sp" />
 
 
         <LinearLayout
@@ -70,7 +72,7 @@
                 android:layout_height="wrap_content"
                 android:text="金额："
                 android:textColor="#666666"
-                android:textSize="13dp" />
+                android:textSize="15sp" />
 
 
             <TextView
@@ -80,7 +82,7 @@
                 android:layout_marginLeft="4dp"
                 android:text="¥：5.00"
                 android:textColor="#f5142f"
-                android:textSize="13dp" />
+                android:textSize="15sp" />
 
         </LinearLayout>
     </LinearLayout>

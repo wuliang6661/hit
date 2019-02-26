@@ -2,12 +2,12 @@ package com.wul.hlt.ui.orderdetails;
 
 
 import android.annotation.SuppressLint;
-import android.app.Dialog;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -20,8 +20,9 @@ import com.dinuscxj.progressbar.CircleProgressBar;
 import com.wul.hlt.R;
 import com.wul.hlt.entity.OrderDetails;
 import com.wul.hlt.mvp.MVPBaseActivity;
+import com.wul.hlt.util.PhoneUtils;
 import com.wul.hlt.util.TimeUtils;
-import com.wul.hlt.widget.CircleTextProgressbar;
+import com.wul.hlt.widget.AlertDialog;
 import com.wul.hlt.widget.lgrecycleadapter.LGRecycleViewAdapter;
 import com.wul.hlt.widget.lgrecycleadapter.LGViewHolder;
 
@@ -54,6 +55,7 @@ public class OrderDetailsActivity extends MVPBaseActivity<OrderDetailsContract.V
     TextView takeTime;        //   配送时间
     TextView orderTime;        //下单时间
     RecyclerView goodList;      //采购清单
+    TextView shopId;        //门店编号
     RelativeLayout allPriceLayout;   //底部订单布局
 
     private int strOrderId;
@@ -99,6 +101,7 @@ public class OrderDetailsActivity extends MVPBaseActivity<OrderDetailsContract.V
         takeShopName = (TextView) findViewById(R.id.take_shop_name);
         takeAddress = (TextView) findViewById(R.id.take_address);
         customerPhone = (TextView) findViewById(R.id.customer_phone);
+        shopId = (TextView) findViewById(R.id.shop_id);
         takeTime = (TextView) findViewById(R.id.take_time);
         orderTime = (TextView) findViewById(R.id.order_time);
         goodList = (RecyclerView) findViewById(R.id.good_list);
@@ -116,6 +119,7 @@ public class OrderDetailsActivity extends MVPBaseActivity<OrderDetailsContract.V
         goodList.setNestedScrollingEnabled(false);
         back.setOnClickListener(this);
         orderTaking.setOnClickListener(this);
+        customerPhone.setOnClickListener(this);
     }
 
 
@@ -155,12 +159,12 @@ public class OrderDetailsActivity extends MVPBaseActivity<OrderDetailsContract.V
                 break;
             case 1:
                 payType.setText("已支付");
-                payType.setTextColor(Color.parseColor("#61c95f"));
+                payType.setTextColor(ContextCompat.getColor(OrderDetailsActivity.this, R.color.zhu_color));
                 break;
         }
         unorderTitle.setVisibility(View.GONE);
         allPriceLayout.setVisibility(View.VISIBLE);
-        orderType.setTextColor(Color.parseColor("#61C95F"));
+        orderType.setTextColor(ContextCompat.getColor(OrderDetailsActivity.this, R.color.zhu_color));
         switch (orderDetails.getStatusId()) {
             case 0:  //待接单
                 orderType.setText("待接单");
@@ -255,6 +259,17 @@ public class OrderDetailsActivity extends MVPBaseActivity<OrderDetailsContract.V
                 break;
             case R.id.order_taking:
                 mPresenter.takingOrder(strOrderId + "");
+                break;
+            case R.id.customer_phone:
+                new AlertDialog(this).builder().setGone().setMsg(customerPhone.getText().toString().trim())
+                        .setNegativeButton("取消", null)
+                        .setPositiveButton("拨打", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                PhoneUtils.callPhone(customerPhone.getText().toString().trim());
+                            }
+                        }).show();
+
                 break;
         }
     }

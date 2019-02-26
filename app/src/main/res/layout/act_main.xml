@@ -9,17 +9,17 @@
     <View
         android:id="@+id/ding_view"
         android:layout_width="match_parent"
-        android:layout_height="15dp"
-        android:background="#61c95f" />
+        android:layout_height="24dp"
+        android:background="@color/zhu_color" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="#61c95f"
+        android:background="@color/zhu_color"
         android:gravity="center"
         android:text="我的订单"
         android:textColor="@color/white"
-        android:textSize="18dp" />
+        android:textSize="18sp" />
 
 
     <LinearLayout
@@ -143,7 +143,7 @@
                 android:id="@+id/line_lishi"
                 android:layout_width="match_parent"
                 android:layout_height="1px"
-                android:background="#61c95f" />
+                android:background="@color/zhu_color" />
 
 
             <android.support.v7.widget.RecyclerView

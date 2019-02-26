@@ -26,10 +26,12 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.os.Build;
 import android.support.annotation.ColorInt;
+import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
 import com.wul.hlt.R;
+import com.wul.hlt.ui.orderdetails.OrderDetailsActivity;
 
 /**
  * Created on 2016/7/12.
@@ -60,7 +62,7 @@ public class CircleTextProgressbar extends TextView {
     /**
      * 进度条的颜色。
      */
-    private int progressLineColor = Color.parseColor("#61c95f");
+    private int progressLineColor = ContextCompat.getColor(getContext(), R.color.zhu_color);
 
     /**
      * 进度条的宽度。
