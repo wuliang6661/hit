@@ -35,6 +35,15 @@ public class OrderDetails {
     private long createDate;
     private List<ProductDetailListBean> productDetailList;
     private long endTime;
+    private String addressNumber;
+
+    public String getAddressNumber() {
+        return addressNumber;
+    }
+
+    public void setAddressNumber(String addressNumber) {
+        this.addressNumber = addressNumber;
+    }
 
     public long getEndTime() {
         return endTime;

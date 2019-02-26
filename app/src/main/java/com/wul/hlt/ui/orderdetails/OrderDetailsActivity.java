@@ -144,7 +144,7 @@ public class OrderDetailsActivity extends MVPBaseActivity<OrderDetailsContract.V
     @Override
     public void getOrderDetails(OrderDetails orderDetails) {
         this.orderDetails = orderDetails;
-        orderId.setText("订单编号：" + orderDetails.getId());
+        orderId.setText("订单编号：" + orderDetails.getOrderDisplayId());
         takeGoodsPerson.setText("收货人：" + orderDetails.getConsigneeName());
         takeShopName.setText("收货店名：" + orderDetails.getDeliverRestName());
         takeAddress.setText("收货地址：" + orderDetails.getDeliverAddress());
@@ -152,6 +152,7 @@ public class OrderDetailsActivity extends MVPBaseActivity<OrderDetailsContract.V
         orderTime.setText(TimeUtils.millis2String(orderDetails.getCreateDate(), "yyyy年MM月dd HH:mm:ss"));
         allPrice.setText("¥ " + orderDetails.getAmount());
         allPriceButtom.setText("¥ " + orderDetails.getAmount());
+        shopId.setText("门店编号："+orderDetails.getAddressNumber());
         switch (orderDetails.getPayStatus()) {
             case 0:
                 payType.setText("未支付");

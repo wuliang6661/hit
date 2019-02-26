@@ -12,7 +12,6 @@ public class MediaListener implements MediaPlayer.OnCompletionListener {
     @Override
     public void onCompletion(MediaPlayer mp) {
         if (count <= 2) {
-            LogUtils.e("循环一次啦~~~~~~");
             mp.start();
             count++;
         }

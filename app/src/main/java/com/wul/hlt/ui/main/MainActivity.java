@@ -130,7 +130,7 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
         LinearLayoutManager manager1 = new LinearLayoutManager(this);
         manager1.setOrientation(LinearLayoutManager.VERTICAL);
         lishiOrder.setLayoutManager(manager1);
-        lishiOrder.setNestedScrollingEnabled(false);
+//        lishiOrder.setNestedScrollingEnabled(false);
     }
 
 
