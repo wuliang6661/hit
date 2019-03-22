@@ -128,13 +128,22 @@
 
 
             <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="总额："
+                android:textColor="#666666"
+                android:textSize="18dp" />
+
+
+            <TextView
                 android:id="@+id/all_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="8dp"
-                android:text="总额：0.00"
-                android:textColor="#666666"
+                android:text="0.00"
+                android:textColor="#f5142f"
                 android:textSize="18dp" />
+
 
         </LinearLayout>
 

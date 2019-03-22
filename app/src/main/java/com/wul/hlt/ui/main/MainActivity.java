@@ -154,7 +154,7 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
             lishiOrder.setVisibility(View.VISIBLE);
             lineLishi.setVisibility(View.VISIBLE);
             lishiOrderTitle.setVisibility(View.VISIBLE);
-            allPrice.setText("总额：¥ " + historyOrderBo.getACountMoneyTotal());
+            allPrice.setText("¥ " + historyOrderBo.getACountMoneyTotal());
             setHistoryAdapter();
         }
     }

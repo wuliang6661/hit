@@ -88,7 +88,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="18dp"
             android:text="¥50.00"
-            android:textColor="#666666"
+            android:textColor="#f5142f"
             android:textSize="13sp" />
 
     </LinearLayout>
