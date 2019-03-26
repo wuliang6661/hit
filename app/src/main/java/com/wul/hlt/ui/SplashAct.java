@@ -34,24 +34,24 @@ public class SplashAct extends BaseActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (MyApplication.spUtils.getBoolean("isHaveMe", false)) {
-            strPhone = MyApplication.spUtils.getString("phone");
-            strPwd = MyApplication.spUtils.getString("pwd");
-            strShopNum = MyApplication.spUtils.getString("shopNum");
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    login(strPhone, strPwd, strShopNum);
-                }
-            }, 2000);
-        } else {
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    gotoActivity(LoginActivity.class, true);
-                }
-            }, 2000);
-        }
+//        if (MyApplication.spUtils.getBoolean("isHaveMe", false)) {
+//            strPhone = MyApplication.spUtils.getString("phone");
+//            strPwd = MyApplication.spUtils.getString("pwd");
+//            strShopNum = MyApplication.spUtils.getString("shopNum");
+//            new Handler().postDelayed(new Runnable() {
+//                @Override
+//                public void run() {
+//                    login(strPhone, strPwd, strShopNum);
+//                }
+//            }, 2000);
+//        } else {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                gotoActivity(LoginActivity.class, true);
+            }
+        }, 2000);
+//        }
     }
 
 
