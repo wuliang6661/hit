@@ -70,14 +70,14 @@
         android:layout_height="match_parent"
         android:layout_alignParentRight="true"
         android:layout_marginRight="10dp"
-        android:gravity="center_vertical"
+        android:gravity="center_vertical|right"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/order_type"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="已终止"
+            android:text=""
             android:textColor="#666666"
             android:textSize="13sp" />
 
@@ -87,7 +87,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="18dp"
-            android:text="¥50.00"
+            android:text="¥0.00"
             android:textColor="#f5142f"
             android:textSize="13sp" />
 
