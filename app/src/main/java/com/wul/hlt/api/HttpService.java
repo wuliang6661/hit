@@ -68,7 +68,7 @@ public interface HttpService {
     /**
      * 获取版本对比
      */
-    @POST("/hct_webservice/app/address/getVersion")
+    @POST("/hct_webservice/app/greengrocer/getVersion")
     Observable<BaseResult<VersionBo>> getVersionName(@Body GetVersionRequest request);
 
 
