@@ -1,17 +1,22 @@
 package com.wul.hlt.api;
 
 import com.wul.hlt.base.MyApplication;
+import com.wul.hlt.entity.GetVersionRequest;
 import com.wul.hlt.entity.HistoryOrderBo;
 import com.wul.hlt.entity.OrderDetails;
 import com.wul.hlt.entity.UnOrderBo;
 import com.wul.hlt.entity.UserBo;
+import com.wul.hlt.entity.VersionBo;
 import com.wul.hlt.util.rx.RxResultHelper;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
+
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 import rx.Observable;
 
 /**
@@ -24,6 +29,8 @@ public class HttpServiceIml {
 
     private static HttpService service;
 
+    private static HttpService downLoadService;
+
     /**
      * 获取代理对象
      *
@@ -33,6 +40,17 @@ public class HttpServiceIml {
         if (service == null)
             service = ApiManager.getInstance().configRetrofit(HttpService.class, HttpService.URL);
         return service;
+    }
+
+    /**
+     * 获取代理对象
+     *
+     * @return
+     */
+    public static HttpService getDownLoadService(DownloadResponseBody.DownloadListener listener) {
+        downLoadService = ApiManager.getInstance().downloadConfigRetrofit(HttpService.class, HttpService.URL, listener);
+        return downLoadService;
+
     }
 
 
@@ -114,6 +132,27 @@ public class HttpServiceIml {
         }
         RequestBody body = RequestBody.create(MediaType.parse("application/json"), object.toString());
         return getService().getGreengrocerOrder(body).compose(RxResultHelper.<OrderDetails>httpRusult());
+    }
+
+
+    /**
+     * 获取版本信息
+     */
+    public static Observable<VersionBo> getVersionInfo() {
+        GetVersionRequest request = new GetVersionRequest();
+        request.type = 1;
+        request.token = MyApplication.spUtils.getString("token");
+        return getService().getVersionName(request).compose(RxResultHelper.httpRusult());
+    }
+
+
+    /**
+     * 下载
+     */
+    public static Observable<ResponseBody> downLoad(String url, DownloadResponseBody.DownloadListener
+            downloadListener, File file) {
+        //url = "http://172.18.100.26:8080/manager/images/kkk.7z";
+        return getDownLoadService(downloadListener).download(url).compose(RxResultHelper.downRequest(file));
     }
 
 

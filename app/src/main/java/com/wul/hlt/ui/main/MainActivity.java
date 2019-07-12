@@ -13,6 +13,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.KeyEvent;
@@ -29,6 +30,7 @@ import com.wul.hlt.mvp.MVPBaseActivity;
 import com.wul.hlt.ui.orderdetails.OrderDetailsActivity;
 import com.wul.hlt.util.AppManager;
 import com.wul.hlt.util.TimeUtils;
+import com.wul.hlt.util.UpdateUtils;
 import com.wul.hlt.widget.MediaListener;
 import com.wul.hlt.widget.lgrecycleadapter.LGRecycleViewAdapter;
 import com.wul.hlt.widget.lgrecycleadapter.LGViewHolder;
@@ -82,13 +84,8 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
         mPresenter.getUnOrderList();
         handler.sendEmptyMessageDelayed(0, updateTime);
 
-        if (ActivityCompat.checkSelfPermission(AppManager.getAppManager().curremtActivity(), Manifest.permission.CALL_PHONE) !=
-                PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(AppManager.getAppManager().curremtActivity(),
-                    new String[]{
-                            Manifest.permission.CALL_PHONE
-                    }, 1);
-        }
+        requestPermission();
+        UpdateUtils.checkUpdate();
     }
 
     @Override
@@ -330,6 +327,26 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
             }
         });
         lishiOrder.setAdapter(adapter);
+    }
+
+
+    private void requestPermission() {
+        // Here, thisActivity is the current activity
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE)
+                != PackageManager.PERMISSION_GRANTED
+                || ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED
+                || ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            ActivityCompat.requestPermissions(this,
+                    new String[]{
+                            Manifest.permission.READ_PHONE_STATE,
+                            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                            Manifest.permission.CALL_PHONE
+                    }, 1);
+
+        }
     }
 
 

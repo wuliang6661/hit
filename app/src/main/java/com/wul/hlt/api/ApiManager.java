@@ -97,6 +97,36 @@ public class ApiManager {
 
 
     /**
+     * 文件下载请求代理
+     */
+    HttpService downloadConfigRetrofit(Class<HttpService> httpServiceClass, String url,
+                                       DownloadResponseBody.DownloadListener downloadListener) {
+        //手动创建一个OkHttpClient并设置超时时间
+        OkHttpClient.Builder builder = new OkHttpClient.Builder();
+        builder.connectTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS);
+        HttpLoggingInterceptor.Level level = HttpLoggingInterceptor.Level.BODY;
+        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor(message -> Log.i(TAG, "log: " + message));
+        loggingInterceptor.setLevel(level);
+        builder.addInterceptor(loggingInterceptor);
+        builder.addInterceptor(chain -> {
+            Response originalResponse = chain.proceed(chain.request());
+            return originalResponse.newBuilder()
+                    .body(new DownloadResponseBody(originalResponse.body(), downloadListener))
+                    .build();
+        });
+
+        Retrofit mRetrofit = new Retrofit.Builder()
+                .baseUrl(url)
+                .client(builder.build())
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .build();
+        return mRetrofit.create(httpServiceClass);
+    }
+
+
+
+    /**
      * 自定义网络拦截器，如果头部信息中有通知数据已压缩，则解压过滤
      */
     private Interceptor postInterceptor = new Interceptor() {

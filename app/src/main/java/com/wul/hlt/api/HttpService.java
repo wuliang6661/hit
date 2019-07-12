@@ -1,14 +1,20 @@
 package com.wul.hlt.api;
 
 import com.wul.hlt.entity.BaseResult;
+import com.wul.hlt.entity.GetVersionRequest;
 import com.wul.hlt.entity.HistoryOrderBo;
 import com.wul.hlt.entity.OrderDetails;
 import com.wul.hlt.entity.UnOrderBo;
 import com.wul.hlt.entity.UserBo;
+import com.wul.hlt.entity.VersionBo;
 
 import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 import retrofit2.http.Body;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Streaming;
+import retrofit2.http.Url;
 import rx.Observable;
 
 /**
@@ -59,4 +65,17 @@ public interface HttpService {
     Observable<BaseResult<OrderDetails>> getGreengrocerOrder(@Body RequestBody body);
 
 
+    /**
+     * 获取版本对比
+     */
+    @POST("/hct_webservice/app/address/getVersion")
+    Observable<BaseResult<VersionBo>> getVersionName(@Body GetVersionRequest request);
+
+
+    /**
+     * 下载
+     */
+    @Streaming
+    @GET
+    Observable<ResponseBody> download(@Url String url);
 }

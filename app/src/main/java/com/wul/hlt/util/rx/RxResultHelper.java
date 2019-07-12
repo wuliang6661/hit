@@ -10,6 +10,12 @@ import com.wul.hlt.entity.BaseResult;
 import com.wul.hlt.ui.login.LoginActivity;
 import com.wul.hlt.util.AppManager;
 
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+
+import okhttp3.ResponseBody;
 import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
@@ -65,4 +71,49 @@ public class RxResultHelper {
             }
         });
     }
+
+    public static Observable.Transformer<ResponseBody, ResponseBody> downRequest(File file) {
+        return apiResponseObservable -> apiResponseObservable
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .flatMap(new Func1<ResponseBody, Observable<ResponseBody>>() {
+                    @Override
+                    public Observable<ResponseBody> call(ResponseBody responseBody) {
+                        return write2File(responseBody, file);
+
+                    }
+                })
+                .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+    }
+
+
+    private static Observable<ResponseBody> write2File(ResponseBody body, File file) {
+        return Observable.create(subscriber -> {
+            try {
+                InputStream inputStream = body.byteStream();
+                //long totalSize = body.contentLength();
+                // long currentLength = 0;
+
+                FileOutputStream fos = new FileOutputStream(file);
+                BufferedInputStream bis = new BufferedInputStream(inputStream);
+                byte[] buffer = new byte[1024];
+                int len;
+
+                while ((len = bis.read(buffer)) != -1) {
+                    fos.write(buffer, 0, len);
+                    fos.flush();
+                    //currentLength += len;
+                    //LogUtils.e("write2File", currentLength + "");
+                    //subscriber.onNext((int) (100 * currentLength / totalSize));
+                }
+                fos.close();
+                bis.close();
+                inputStream.close();
+                subscriber.onCompleted();
+            } catch (Exception e) {
+                subscriber.onError(e);
+            }
+        });
+    }
+
 }
